@@ -9,7 +9,8 @@ public class HttpRequests {
     @Test
     void getUsers() {
 
-        when().get("https://reqres.in/api/users?page=2")
+        when()
+                .get("https://reqres.in/api/users?page=2")
                 .then()
                 .body("page", equalTo(2))
                 .log()

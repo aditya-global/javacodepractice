@@ -1,9 +1,8 @@
 package day1;
 
 import org.testng.annotations.Test;
-
 import static io.restassured.RestAssured.*;
-import static org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.*; //restassured internally uses hamcrest matchers
 
 public class HttpRequests {
 

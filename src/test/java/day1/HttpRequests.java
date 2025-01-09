@@ -91,6 +91,15 @@ public class HttpRequests {
                 .log().body();
 
     }
+    @Test(priority = 5, dependsOnMethods = {"createUser2"})
+    void deleteUser(){
+        given()
+                .when()
+                .delete("/api/users/"+id)
+                .then()
+                .statusCode(204)
+                .log().all();
+    }
 
 
 }

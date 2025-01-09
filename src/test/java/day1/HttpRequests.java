@@ -1,6 +1,8 @@
 package day1;
 
 import io.restassured.RestAssured;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -11,6 +13,7 @@ import static org.hamcrest.Matchers.*; //restassured internally uses hamcrest ma
 
 public class HttpRequests {
 
+    private static final Logger log = LoggerFactory.getLogger(HttpRequests.class);
     int id;
 
     @BeforeClass
@@ -59,7 +62,7 @@ public class HttpRequests {
         // Same post request but for capturing a response parameter
 
         HashMap<String, String> hm = new HashMap<>();
-        hm.put("name", "Aditya4");
+        hm.put("name", "Aditya5");
         hm.put("job", "QA");
 
         id = given()
@@ -68,7 +71,7 @@ public class HttpRequests {
                 .when()
                 .post("/api/users")
                 .jsonPath().getInt("id"); //capturing an int response
-
+        System.out.println("User id create is: "+id);
     }
 
     //This test will execute only when test getUser2 will pass
@@ -78,7 +81,7 @@ public class HttpRequests {
         // Here, we will update the "job" value using id created and captured from createUser2
 
         HashMap<String, String> hm = new HashMap<>();
-        hm.put("name", "Aditya4");
+        hm.put("name", "Aditya5");
         hm.put("job", "Automation QA");
 
         given()
@@ -88,14 +91,15 @@ public class HttpRequests {
                 .put("/api/users/" + id)
                 .then()
                 .statusCode(200)
-                .log().body();
+                .log().
 
     }
     @Test(priority = 5, dependsOnMethods = {"createUser2"})
     void deleteUser(){
         given()
+                .pathParam("id",id)
                 .when()
-                .delete("/api/users/"+id)
+                .delete("/api/users/{id}")
                 .then()
                 .statusCode(204)
                 .log().all();

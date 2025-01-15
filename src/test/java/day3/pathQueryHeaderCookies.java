@@ -1,13 +1,10 @@
 package day3;
 
-import io.restassured.response.Response;
 import org.testng.annotations.Test;
-
-import java.util.Map;
 
 import static io.restassured.RestAssured.*;
 
-public class PathQueryHeaderCookies {
+public class pathQueryHeaderCookies {
 
     @Test
     void getCookiesInfo() {
